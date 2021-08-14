@@ -4,8 +4,8 @@ CREATE DATABASE employees_db;
 
 USE employees_db;
 
--- Table for departement
-CREATE TABLE departement (
+-- Table for department
+CREATE TABLE department (
     id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(50) NOT NULL,
     PRIMARY KEY(id)
@@ -16,7 +16,7 @@ CREATE TABLE role (
     id INT NOT NULL AUTO_INCREMENT,
     title VARCHAR(50) NOT NULL,
     salary DECIMAL NOT NULL,
-    departement_id INT NOT NULL,
+    department_id INT NOT NULL,
     PRIMARY KEY (id)
 );
 
