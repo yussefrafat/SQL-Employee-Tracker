@@ -1,14 +1,14 @@
 const mysql2 = require('mysql2');
 const inquirer = require('inquirer');
-const consoleTable = require('console.table');
+const consoleTable = require('console.table')
 
 // creates connection to sql database 
-const connection = mysql.createConnection({
+const connection = mysql2.createConnection({
     host: 'localhost',
-    port: 5908,
+    port: 3306,
     user: 'root',
     password: 'Lille59000',
-    database: 'employee_db'
+    database: 'employees_db'
 })
 
 // connects to sql server and sql database
@@ -30,10 +30,10 @@ function options() {
             'View all departments',
             'View all roles',
             'Add an employee',
-            'Add a department',
+            // 'Add a department',
             'Add a role',
-            'Update employee role',
-            'Delete an employee',
+           // 'Update employee role',
+           // 'Delete an employee',
             'EXIT'
         ]
     }).then(function (answer) {
@@ -50,18 +50,18 @@ function options() {
             case 'Add an employee':
                 addEmployee();
                 break;
-            case 'Add a departement':
-                addDepartment();
-                break;
+           // case 'Add a departement':
+               // addDepartment();
+               // break;
             case 'Add a role':
                 addRole();
                 break;
-            case 'Update employee role':
-                updateRole();
-                break;
-            case 'Delete an employee':
-                deleteEmployee();
-                break;
+         //   case 'Update employee role':
+           //     updateRole();
+             //   break;
+         //  case 'Delete an employee':
+           //     deleteEmployee();
+           //     break;
             case 'EXIT':
                 exitApp();
                 break;
@@ -88,6 +88,16 @@ function viewEmployees() {
 function viewRoles() {
     var query = 'SELECT * FROM role';
     connection.query(query, function(err,res) {
+        if(err)throw err;
+        console.table('All Roles:', res);
+        options();
+    })
+};
+
+// view all department 
+function viewDepartments() {
+    var query = 'SELECT * FROM department';
+    connection.query(query, function(err, res) {
         if(err)throw err;
         console.table('All Departments:', res);
         options();
@@ -204,7 +214,7 @@ function addRole() {
     })
 };
 
-// update a role in teh database 
+// update a role in the database 
 function updateRole() {
 
 };
@@ -216,5 +226,5 @@ function deleteEmployee() {
 
 // exit the app
 function exitApp() {
-
+    connection.end();
 };
